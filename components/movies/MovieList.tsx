@@ -10,7 +10,6 @@ import SegmentedControl from "@/components/ui/SegmentedControl";
 import MovieSkeleton from "@/components/movies/MovieSkeleton";
 import ErrorState from "@/components/ui/ErrorState";
 import Pagination from "@/components/ui/Pagination";
-import { Search } from "lucide-react";
 
 const categoryOptions = [
     { label: "Now Playing", value: "now_playing" },
@@ -53,7 +52,7 @@ export default function MovieList() {
 
     return (
         <div>
-            <div className="mb-6 flex justify-between">
+            <div className="mb-6 flex justify-center md:justify-end">
                 <SegmentedControl
                     options={categoryOptions.map(
                         (option) => option.label,
