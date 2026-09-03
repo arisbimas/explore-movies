@@ -18,3 +18,33 @@ export interface MovieResponse {
     total_pages: number;
     total_results: number;
 }
+
+export interface MovieCast {
+    id: number;
+    name: string;
+    character: string;
+    profile_path: string | null;
+    order: number;
+}
+
+export interface MovieCrew {
+    id: number;
+    name: string;
+    job: string;
+    department: string;
+    profile_path: string | null;
+}
+
+export interface MovieDetail extends Movie {
+    overview: string;
+    backdrop_path: string | null;
+    runtime: number | null;
+    genres: {
+        id: number;
+        name: string;
+    }[];
+    credits: {
+        cast: MovieCast[];
+        crew: MovieCrew[];
+    };
+}

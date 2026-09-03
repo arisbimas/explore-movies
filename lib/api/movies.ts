@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api/apiClient";
-import type { MovieCategory, MovieResponse } from "@/types/movie";
+import type { MovieCategory, MovieDetail, MovieResponse } from "@/types/movie";
 
 interface GetMoviesByCategoryParams {
     category: MovieCategory;
@@ -13,5 +13,14 @@ export async function getMoviesByCategory({
     const response = await apiClient.get("/movies", {
         params: { category, page },
     });
+    return response.data;
+}
+
+
+export async function getMovieDetail(
+    id: number,
+): Promise<MovieDetail> {
+    const response = await apiClient.get(`/movies/${id}`);
+
     return response.data;
 }

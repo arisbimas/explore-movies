@@ -103,17 +103,12 @@ export default function SearchModal({
                     {!isLoading && !isError && movies.length > 0 && (
                         <div className="divide-y divide-border">
                             {movies.map((movie: Movie) => (
-                                <button
+                                <MovieCard
                                     key={movie.id}
-                                    type="button"
-                                    className="flex w-full gap-3 px-4 text-left transition-colors hover:bg-surface-hover"
-                                >
-                                    <MovieCard
-                                        key={movie.id}
-                                        {...movie}
-                                        variant="search"
-                                    />
-                                </button>
+                                    {...movie}
+                                    variant="search"
+                                    onClick={onClose}
+                                />
                             ))}
                         </div>
                     )}
@@ -124,13 +119,13 @@ export default function SearchModal({
                         <button
                             type="button"
                             onClick={handleViewAll}
-                            className="flex w-full items-center justify-between px-4 py-4 text-left text-sm font-medium text-primary cursor-pointer transition-colors hover:bg-surface-hover"
+                            className="flex w-full items-center justify-between px-4 py-4 text-left text-sm cursor-pointer transition-colors hover:bg-surface-hover"
                         >
                             <span>
-                                {`View all results for "${keyword.trim()}"`}
+                                View all results for <span className="font-medium text-primary">{`"${keyword}"`}</span>
                             </span>
 
-                            <span aria-hidden="true"><ArrowRight /></span>
+                            <span aria-hidden="true" className="text-primary"><ArrowRight /></span>
                         </button>
                     </div>
                 )}

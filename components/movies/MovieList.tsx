@@ -10,6 +10,7 @@ import SegmentedControl from "@/components/ui/SegmentedControl";
 import MovieSkeleton from "@/components/movies/MovieSkeleton";
 import ErrorState from "@/components/ui/ErrorState";
 import Pagination from "@/components/ui/Pagination";
+import ResultCount from "@/components/movies/ResultCount";
 
 const categoryOptions: {
     label: string;
@@ -59,14 +60,14 @@ export default function MovieList() {
     };
 
     return (
-        <div>
-            <div className="mb-6 flex flex-col items-center gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="py-4 px-4 sm:px-3 lg:px-8">
+            <div className="mb-8 flex flex-col items-center gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div className="">
                     <h1 className="text-2xl font-semibold tracking-tight">
                         Discover Movies
                     </h1>
 
-                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-foreground/70">
                         Explore movies currently playing, popular titles,
                         top-rated films, and upcoming releases.
                     </p>
@@ -103,10 +104,7 @@ export default function MovieList() {
                             <h2 className="text-lg font-semibold">
                                 {currentCategory}
                             </h2>
-
-                            <p className="mt-1 text-sm text-muted">
-                                {data.total_results} movies found
-                            </p>
+                            <ResultCount count={data.total_results} label="movies found" />
                         </div>
                     </div>
 

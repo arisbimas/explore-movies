@@ -17,20 +17,22 @@ export default function Pagination({
                 type="button"
                 disabled={page <= 1}
                 onClick={() => onPageChange(page - 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm transition-colors cursor-pointer hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-40"
+                className="rounded-md border border-primary bg-primary px-2.5 py-1.5 text-sm font-medium text-background transition-colors hover:bg-primary/90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
             >
-                Previous
+                Prev
             </button>
 
             <span className="text-sm text-muted">
-                Page {page} of {totalPages}
+                Page{" "}
+                <span className="font-medium text-primary">{page}</span>{" "}
+                of <span>{totalPages}</span>
             </span>
 
             <button
                 type="button"
                 disabled={page >= totalPages}
                 onClick={() => onPageChange(page + 1)}
-                className="rounded-md border border-border px-4 py-2 text-sm transition-colors cursor-pointer hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-40"
+                className="rounded-md border border-primary bg-primary px-2.5 py-1.5 text-sm font-medium text-background transition-colors hover:bg-primary/90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
             >
                 Next
             </button>
