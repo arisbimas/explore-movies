@@ -6,18 +6,19 @@ export default function MovieCast({ cast }: { cast: MovieCastProps[] }) {
     return (
         <section className="mt-12 pb-12">
             <h2 className="text-lg font-semibold">Main Cast</h2>
-            <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 sm:gap-4">
                 {cast.map((person) => {
-                    const profileUrl = getPosterUrl(person.profile_path);
+                    const profileUrl = getPosterUrl(person.profile_path, "w200");
                     return (
                         <div key={person.id}>
-                            <div className="relative aspect-2/3 overflow-hidden rounded-lg bg-surface">
+                            <div className="relative aspect-3/4 overflow-hidden rounded-lg bg-surface">
                                 {profileUrl ? (
                                     <Image
                                         src={profileUrl}
                                         alt={person.name}
                                         fill
                                         className="object-cover"
+                                        sizes="(max-width: 768px) 30vw, 150px"
                                     />
                                 ) : (
                                     <div className="flex h-full items-center justify-center text-xs text-muted">
