@@ -11,7 +11,7 @@ export default function SegmentedControl(props: SegmentedControlProps) {
     const { className, options, onChange, value } = props;
 
     return (
-        <div className={`inline-flex items-center gap-1 p-1.5 rounded-4xl bg-surface border border-neutral-800 max-w-full overflow-x-auto ${className}`}>
+        <div className={`max-h-fit inline-flex items-center gap-1 p-1.5 rounded-4xl bg-surface border border-neutral-800 max-w-full overflow-x-auto ${className}`}>
             {options.map((option) => {
                 const isActive = value === option;
                 return (

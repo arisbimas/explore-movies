@@ -45,7 +45,7 @@ export default function SearchModal({
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 px-4 pt-24"
+            className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 px-4 pt-24 backdrop-blur-sm"
             onMouseDown={onClose}
         >
             <div
