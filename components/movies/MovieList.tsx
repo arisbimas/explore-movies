@@ -1,16 +1,14 @@
 "use client";
 
-import { useState } from "react";
-
 import { useMovies } from "@/hooks/useMovies";
 import { MovieCategory } from "@/types/movie";
-
 import MovieCard from "./MovieCard";
 import SegmentedControl from "@/components/ui/SegmentedControl";
 import MovieSkeleton from "@/components/movies/MovieSkeleton";
 import ErrorState from "@/components/ui/ErrorState";
 import Pagination from "@/components/ui/Pagination";
 import ResultCount from "@/components/movies/ResultCount";
+import { useRouter } from "next/navigation";
 
 const categoryOptions: {
     label: string;
@@ -22,10 +20,25 @@ const categoryOptions: {
         { label: "Upcoming", value: "upcoming" },
     ];
 
-export default function MovieList() {
-    const [category, setCategory] =
-        useState<MovieCategory>("now_playing");
-    const [page, setPage] = useState(1);
+interface MovieListProps {
+    category: string;
+    page: number;
+}
+
+export default function MovieList({
+    category: initialCategory,
+    page,
+}: MovieListProps) {
+    const router = useRouter();
+
+    const validCategories: MovieCategory[] = [
+        "now_playing",
+        "popular",
+        "top_rated",
+        "upcoming",
+    ];
+
+    const category = validCategories.includes(initialCategory as MovieCategory) ? (initialCategory as MovieCategory) : "now_playing";
 
     const {
         data,
@@ -39,10 +52,13 @@ export default function MovieList() {
 
     const movies = data?.results ?? [];
 
-    const currentCategory =
-        categoryOptions.find(
-            (option) => option.value === category,
-        )?.label ?? "";
+    const currentCategory = categoryOptions.find((option) => option.value === category)?.label ?? "Now Playing";
+
+    const updateUrl = (nextCategory: string, nextPage: number) => {
+        router.push(
+            `?category=${encodeURIComponent(nextCategory)}&page=${nextPage}`,
+        );
+    };
 
     const handleCategoryChange = (label: string) => {
         const found = categoryOptions.find(
@@ -51,12 +67,7 @@ export default function MovieList() {
 
         if (!found) return;
 
-        setCategory(found.value);
-        setPage(1);
-    };
-
-    const handlePageChange = (nextPage: number) => {
-        setPage(nextPage);
+        updateUrl(found.value, 1);
     };
 
     return (
@@ -118,7 +129,7 @@ export default function MovieList() {
                         <Pagination
                             page={page}
                             totalPages={data.total_pages}
-                            onPageChange={handlePageChange}
+                            onPageChange={(page) => updateUrl(category, page)}
                         />
                     )}
                 </>
