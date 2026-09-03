@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMovies } from "@/lib/api/movies";
+import { getMoviesByCategory } from "@/lib/api/movies";
 import type { MovieCategory } from "@/types/movie";
 
 interface UseMoviesParams {
@@ -13,6 +13,6 @@ export function useMovies({
 }: UseMoviesParams) {
     return useQuery({
         queryKey: ["movies", category, page],
-        queryFn: () => getMovies({ category, page }),
+        queryFn: () => getMoviesByCategory({ category, page }),
     });
 }
